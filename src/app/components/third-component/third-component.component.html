@@ -1,0 +1,48 @@
+<h2 class="title">Редактирование</h2>
+<form class="example-form">
+    <mat-form-field class="input-width">
+        <input 
+            matInput 
+            placeholder="Название" 
+            [(ngModel)] = "newItem!.name"
+            #name ="ngModel"
+            name="newItem!.name"
+            required >
+    </mat-form-field>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div class="errMessage" *ngIf="name.errors!.required">
+            Заполните поле
+        </div>
+    </div>
+    
+    <mat-form-field class="input-width">
+        <input 
+            matInput 
+            type="number"
+            required 
+            placeholder="Год выпуска" 
+            [(ngModel)] = "newItem!.year"
+            #year = "ngModel"
+            max="2024" 
+            name="newItem!.year">
+    </mat-form-field>
+    <div *ngIf="year.invalid && (year.dirty || year.touched)">
+        <div class="errMessage" *ngIf="year.errors!.required">
+            Заполните поле
+        </div>
+        <div class="errMessage" *ngIf="year.errors!.max">
+            Введите корректный год выпуска
+        </div>
+    </div>
+    <mat-form-field class="select-label">
+        <mat-label>Цвет</mat-label>
+        <mat-select [(ngModel)] = "selectedColor" name="selectedColor">
+        <mat-option *ngFor="let color of colors" [value]="color.value">
+            {{color.viewValue}}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+<button mat-fab color="primary" (click)="editItem()" [disabled] = "year.invalid || name.invalid" class="save-button" aria-label="Example icon button with a home icon">
+    <mat-icon>save</mat-icon>
+</button>

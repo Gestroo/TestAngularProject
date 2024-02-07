@@ -1,0 +1,25 @@
+<h2 class="title">Информация</h2>
+<div *ngIf="!preloader">
+    <form class="example-form">
+        <mat-form-field class="input-width">
+            <input matInput placeholder="Название" disabled [value]="item!.name">
+        </mat-form-field>
+        <mat-form-field class="input-width">
+            <input matInput placeholder="Год выпуска" disabled [value]="item!.year">
+        </mat-form-field>
+        <mat-form-field class="select-label">
+            <mat-label>Цвет</mat-label>
+            <mat-select disabled [value]="item!.color">
+            <mat-option [value]="item!.color">
+                {{item!.color}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <button mat-fab color="primary" class="edit-button" (click)="itemEvent(item)" aria-label="Example icon button with a home icon">
+        <mat-icon>edit</mat-icon>
+    </button>
+</div>
+<div *ngIf="preloader">
+    <h4 class = "title">Загрузка...</h4>
+</div>
